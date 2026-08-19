@@ -1,3 +1,3 @@
-class vehicle:
+class Vehicle:
     pass
-print(vehicle)
+print(Vehicle)
