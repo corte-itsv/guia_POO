@@ -10,5 +10,5 @@ class User:
             return False
 
 u1 = User("alice", "secure123")
-input_password=input("Escribi tu contrasena ")
-u1.check_password(input_password)
+print(u1.check_password("secure123"))
+print(u1.check_password("python123"))
