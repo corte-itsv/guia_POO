@@ -284,3 +284,114 @@ machine.make_latte()
 
 ---
 
+## Ejercicio 12: Atributo de clase compartido entre instancias
+
+**Solución y explicación:**
+
+```python
+class Vehicle:
+    color = "White"
+
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+
+v1 = Vehicle("Tesla", 250)
+v2 = Vehicle("BMW", 200)
+
+print(f"{v1.name} - Color: {v1.color}, Speed: {v1.max_speed}")
+print(f"{v2.name} - Color: {v2.color}, Speed: {v2.max_speed}")
+
+Vehicle.color = "Red"
+
+print(f"{v1.name} - Color: {v1.color}, Speed: {v1.max_speed}")
+print(f"{v2.name} - Color: {v2.color}, Speed: {v2.max_speed}")
+```
+
+- **`color = "White"`**: Declarado a nivel de clase, fuera de `__init__`. Esto significa que pertenece a la clase misma, no a ninguna instancia individual. Todos los objetos comparten el mismo valor a menos que lo sobrescriban individualmente.
+- **`v1.color`**: Cuando Python busca `color` en una instancia y no lo encuentra como atributo de instancia, sube hasta la clase y lo encuentra ahí como atributo de clase. Esta cadena de búsqueda forma parte del orden de resolución de atributos de Python.
+- **`Vehicle.color = "Red"`**: Reasignar mediante el nombre de la clase actualiza el atributo a nivel de clase, por lo que todas las instancias que aún dependan del atributo de clase reflejan inmediatamente el nuevo valor. En cambio, hacer `v1.color = "Red"` solo crearía un nuevo atributo de instancia en `v1`, sin afectar a `v2`.
+
+---
+
+## Ejercicio 13: Subclase Bus que hereda de Vehicle
+
+**Solución y explicación:**
+
+```python
+class Vehicle:
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+
+    def display(self):
+        print(f"Vehicle: {self.name}, Max Speed: {self.max_speed} km/h")
+
+class Bus(Vehicle):
+    pass
+
+bus1 = Bus("School Bus", 120)
+bus1.display()
+```
+
+- **`class Bus(Vehicle):`**: Los paréntesis indican que `Bus` hereda de `Vehicle`. Python configura la cadena de herencia automáticamente, lo que significa que `Bus` obtiene todos los atributos y métodos de `Vehicle` de forma gratuita.
+- **`pass`**: Como `Bus` no agrega ningún comportamiento nuevo en esta etapa, se usa `pass` como marcador de posición. La clase sigue siendo completamente funcional porque todo lo que necesita viene de `Vehicle`.
+- **`bus1.display()`**: Python primero busca `display` en la instancia de `Bus`, luego en la clase `Bus`, y finalmente en `Vehicle`, donde encuentra y ejecuta el método. Este proceso de búsqueda se conoce como Orden de Resolución de Métodos (MRO).
+
+---
+
+## Ejercicio 14: Sobrescribir un método del padre usando super()
+
+**Solución y explicación:**
+
+```python
+class Vehicle:
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+
+    def seating_capacity(self, capacity):
+        print(f"{self.name} seating capacity is: {capacity}")
+
+class Bus(Vehicle):
+    def seating_capacity(self):
+        super().seating_capacity(50)
+
+bus = Bus("School Bus", 120)
+bus.seating_capacity()
+```
+
+- **`def seating_capacity(self, capacity)` en `Vehicle`**: El padre define el método para aceptar un valor de capacidad flexible, manteniéndolo lo suficientemente general para funcionar con cualquier tipo de vehículo.
+- **`def seating_capacity(self)` en `Bus`**: El hijo sobrescribe el método con una versión que no recibe argumento de capacidad. Esta es la sobrescritura: cuando se llama a `seating_capacity()` sobre una instancia de `Bus`, Python ejecuta esta versión en lugar de la del padre.
+- **`super().seating_capacity(50)`**: `super()` retorna un proxy hacia la clase padre, permitiendo que el hijo llame directamente al método del padre. El `50` fijo es el valor por defecto específico del bus, pasado hacia arriba a la implementación del padre para que la lógica de impresión permanezca en un solo lugar.
+- **`bus.seating_capacity()`**: Se llama sin argumentos sobre la instancia de `Bus`. La sobrescritura intercepta la llamada, provee el valor por defecto de `50`, y delega la salida real al padre, combinando el comportamiento de ambas clases de forma limpia.
+
+---
+
+## Ejercicio 15: Agregar tarifa de mantenimiento en clase hija vía super()
+
+**Solución y explicación:**
+
+```python
+class Vehicle:
+    def __init__(self, base_fare):
+        self.base_fare = base_fare
+
+class Taxi(Vehicle):
+    def __init__(self, base_fare):
+        super().__init__(base_fare)
+        self.maintenance_fee = base_fare * 0.10
+
+    def total_fare(self):
+        return self.base_fare + self.maintenance_fee
+
+taxi = Taxi(500)
+print("Total fare with maintenance fee:", taxi.total_fare())
+```
+
+- **`class Vehicle`**: Define la clase padre que acepta y almacena `base_fare` en su constructor.
+- **`super().__init__(base_fare)`**: Llama al constructor del padre desde dentro de la clase hija, asegurando que `self.base_fare` quede correctamente establecido antes de que el hijo agregue su propia lógica.
+- **`self.maintenance_fee = base_fare * 0.10`**: Calcula la tarifa de mantenimiento del 10% y la almacena como un atributo exclusivo del hijo.
+- **`total_fare()`**: Retorna la suma de la tarifa base y la tarifa de mantenimiento, demostrando cómo las clases hijas pueden extender el comportamiento del padre sin modificarlo.
+
+---

@@ -77,3 +77,32 @@
 - Almacena `water`, `coffee` y `milk` como atributos de instancia en `__init__`.
 - En `make_latte()`, define las cantidades requeridas como variables locales y usa una sola condición `if` para verificar los tres recursos a la vez.
 - Si la verificación se cumple, descuenta las cantidades requeridas de cada atributo e imprime los niveles restantes. En caso contrario, imprime un mensaje de fallo.
+
+## Ejercicio 12: Atributo de clase compartido entre instancias
+
+**Pista:**
+- Define `color = "White"` directamente en el cuerpo de la clase, fuera de cualquier método, para convertirlo en un atributo de clase.
+- Los atributos de instancia como `name` y `max_speed` se siguen definiendo en `__init__` como de costumbre.
+- Para actualizar el atributo compartido en todas las instancias, reasígnalo mediante la clase misma: `Vehicle.color = "Red"`.
+
+## Ejercicio 13: Subclase Bus que hereda de Vehicle
+
+**Pista:**
+- Para crear una clase hija, pasa la clase padre como argumento en la definición de la clase: `class Bus(Vehicle):`.
+- Si la clase hija no agrega nada nuevo, usa `pass` en su cuerpo.
+- Crea una instancia de `Bus` usando los mismos argumentos que `Vehicle` y llama a `display()` para confirmar que la herencia funciona.
+
+## Ejercicio 14: Sobrescribir un método del padre usando super()
+
+**Pista:**
+- Define `seating_capacity(self, capacity)` en la clase `Vehicle` y haz que imprima un mensaje usando el argumento capacity.
+- En la clase `Bus`, define un método con el mismo nombre pero sobrescríbelo para llamar a `super().seating_capacity(50)`, pasando el valor por defecto `50` directamente.
+- Llama a `bus.seating_capacity()` sobre una instancia de `Bus` sin argumentos para confirmar que el valor por defecto se aplica.
+
+## Ejercicio 15: Agregar tarifa de mantenimiento en clase hija vía super()
+
+**Pista:**
+- Define una clase `Vehicle` con un `__init__` que acepte `base_fare` y lo almacene como atributo de instancia.
+- Crea una clase `Taxi` que herede de `Vehicle`.
+- En `Taxi.__init__`, llama a `super().__init__(base_fare)` para inicializar al padre, y luego calcula la tarifa de mantenimiento como `base_fare * 0.10`.
+- Agrega un método `total_fare()` que retorne `self.base_fare + self.maintenance_fee`.
