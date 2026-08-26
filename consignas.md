@@ -145,3 +145,50 @@ Kelvin: 373.15
 Latte made! Remaining - Water: 100ml, Coffee: 80g, Milk: 50ml
 Not enough resources to make a latte.
 ```
+
+## Ejercicio 12: Atributo de clase compartido entre instancias
+
+**Consigna:** Escribe un programa en Python para crear una clase `Vehicle` con un atributo de clase `color = "White"` que sea compartido por todas las instancias. Crea dos objetos vehicle y demuestra que ambos comparten el mismo color por defecto, luego muestra que cambiar el atributo de clase actualiza todas las instancias que no lo hayan sobrescrito.
+
+**Propósito:** Este ejercicio clarifica la distinción entre atributos de clase y atributos de instancia. Los atributos de clase se definen directamente en la clase y son compartidos por todas las instancias, lo que los hace ideales para valores por defecto o constantes que aplican universalmente. Entender esta diferencia previene errores sutiles cuando se comparten datos mutables accidentalmente entre objetos.
+
+**Entrada dada:** `v1 = Vehicle("Tesla", 250)` y `v2 = Vehicle("BMW", 200)`.
+
+**Salida esperada:**
+
+```
+Tesla - Color: White, Speed: 250
+BMW - Color: White, Speed: 200
+Tesla - Color: Red, Speed: 250
+BMW - Color: Red, Speed: 200
+```
+
+## Ejercicio 13: Subclase Bus que hereda de Vehicle
+
+**Consigna:** Escribe un programa en Python para crear una clase padre `Vehicle` con atributos `name` y `max_speed` y un método `display()`. Luego crea una clase hija `Bus` que herede todo de `Vehicle` sin agregar nada nuevo, y confirma que una instancia de `Bus` puede acceder al método del padre.
+
+**Propósito:** Este ejercicio introduce la herencia, uno de los cuatro pilares de la OOP. La herencia permite que una clase hija reciba automáticamente todos los atributos y métodos de su clase padre, promoviendo la reutilización de código y expresando relaciones naturales de "es un". Un `Bus` "es un" `Vehicle`, por lo que tiene sentido que comparta la misma interfaz.
+
+**Entrada dada:** `bus1 = Bus("School Bus", 120)`
+
+**Salida esperada:** `Vehicle: School Bus, Max Speed: 120 km/h`
+
+## Ejercicio 14: Sobrescribir un método del padre usando super()
+
+**Consigna:** Escribe un programa en Python donde una clase padre `Vehicle` tenga un método `seating_capacity()` que acepte un argumento `capacity`. Crea una clase hija `Bus` que sobrescriba este método para proporcionar una capacidad de asientos por defecto de `50`, usando `super()` para llamar internamente a la versión del padre.
+
+**Propósito:** Este ejercicio cubre la sobrescritura de métodos y el uso de `super()`, dos herramientas clave en la herencia de OOP. La sobrescritura permite que una clase hija personalice o extienda el comportamiento de un método del padre sin reescribirlo desde cero. `super()` delega parte del trabajo de vuelta al padre, manteniendo el código DRY y conservando la lógica original como base.
+
+**Entrada dada:** `bus = Bus("School Bus", 120)`
+
+**Salida esperada:** `School Bus seating capacity is: 50`
+
+## Ejercicio 15: Agregar tarifa de mantenimiento en clase hija vía super()
+
+**Consigna:** Escribe un programa en Python que cree una clase padre `Vehicle` con una tarifa base, y luego extienda una clase hija `Taxi` que agregue una tarifa de mantenimiento del 10% sobre la tarifa base usando `super()`.
+
+**Propósito:** Este ejercicio enseña cómo usar `super()` para llamar al constructor de la clase padre, extender el comportamiento de la clase hija construyendo sobre atributos heredados, y modelar lógica de precios del mundo real usando herencia.
+
+**Entrada dada:** `base_fare = 500`
+
+**Salida esperada:** `Total fare with maintenance fee: 550.0`
