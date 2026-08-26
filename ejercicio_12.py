@@ -1,5 +1,3 @@
-# Ejercicio 12: Atributo de clase compartido entre instancias
-
 class Vehicle:
     color = "White"
 
