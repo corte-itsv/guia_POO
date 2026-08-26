@@ -1,5 +1,5 @@
 class Vehicle:
-    color="White"
+    color="Red"
     def __init__(self, nombre, max_velocidad):
         self.nombre=nombre
         self.max_velocidad=max_velocidad
