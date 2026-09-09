@@ -302,21 +302,19 @@ c is of type: Cat
 v is of type: Vehicle
 ```
 
-## Ejercicio 23: Verificación de tipos con isinstance() e issubclass()
+##class Animal:
+    pass
 
-**Consigna:** Escribe un programa en Python que use `isinstance()` para verificar si un objeto es instancia de una clase dada, y `issubclass()` para verificar si una clase es subclase de otra.
+class Dog(Animal):
+    pass
 
-**Propósito:** Este ejercicio enseña dos de las herramientas de inspección de tipos más importantes de Python. A diferencia de `type()`, ambas funciones consideran la herencia, haciéndolas esenciales para escribir código flexible y seguro que maneje tipos de objetos mixtos con elegancia.
 
-**Entrada dada:** Una clase `Dog` que hereda de `Animal`, y una instancia `d = Dog()`
+d = Dog()
 
-**Salida esperada:**
-
-```
-Is d an instance of Dog? True
-Is d an instance of Animal? True
-Is Dog a subclass of Animal? True
-Is Animal a subclass of Dog? False
+print("Is d an instance of Dog?", isinstance(d, Dog))
+print("Is d an instance of Animal?", isinstance(d, Animal))
+print("Is Dog a subclass of Animal?", issubclass(Dog, Animal))
+print("Is Animal a subclass of Dog?", issubclass(Animal, Dog)
 ```
 
 ## Ejercicio 24: Suma de vectores usando sobrecarga de __add__
