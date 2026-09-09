@@ -106,3 +106,79 @@
 - Crea una clase `Taxi` que herede de `Vehicle`.
 - En `Taxi.__init__`, llama a `super().__init__(base_fare)` para inicializar al padre, y luego calcula la tarifa de mantenimiento como `base_fare * 0.10`.
 - Agrega un método `total_fare()` que retorne `self.base_fare + self.maintenance_fee`.
+
+## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
+
+**Pista:**
+- Define una clase `Animal` con un método `speak()` que retorne una cadena genérica como `"Some sound"`.
+- Crea las clases `Dog` y `Cat` que hereden de `Animal`.
+- Sobrescribe `speak()` en cada subclase para retornar la cadena de sonido apropiada.
+- Instancia ambas clases y llama a `speak()` en cada objeto para verificar la salida.
+
+## Ejercicio 17: Lógica de pago para empleados de tiempo completo vs medio tiempo
+
+**Pista:**
+- Define una clase base `Employee` con `__init__` que acepte `name` y un método `calculate_pay()` que pueda dejarse como marcador de posición.
+- En `FullTimeEmployee`, almacena el `salary` anual y calcula el pago mensual como `salary / 12`.
+- En `PartTimeEmployee`, almacena `hourly_rate` y `hours_worked`, y luego calcula el pago como su producto.
+- Sobrescribe `calculate_pay()` en cada subclase con la fórmula apropiada.
+
+## Ejercicio 18: Subclases Shape con métodos area() personalizados
+
+**Pista:**
+- Define una clase base `Shape` con un método `area()` que retorne `0` como marcador de posición.
+- Para `Circle`, usa la fórmula `3.14159 * radius ** 2`.
+- Para `Square`, usa `side ** 2`.
+- Para `Triangle`, usa `0.5 * base * height`.
+
+## Ejercicio 19: Subclases Media con atributos específicos por tipo
+
+**Pista:**
+- Define una clase base `Media` con `title` y `price` en `__init__`.
+- Cada subclase debe llamar a `super().__init__(title, price)` y luego agregar su propio atributo único: `author` para `Book`, `frequency` para `Magazine`, y `duration` para `DVD`.
+- Sobrescribe un método `describe()` en cada subclase para imprimir una cadena formateada usando los atributos compartidos y únicos.
+
+## Ejercicio 20: Subclase DiscountedOrder con 10% de descuento
+
+**Pista:**
+- Define una clase `Order` con atributos `order_id` y `total` y un método `get_total()` que retorne `self.total`.
+- En `DiscountedOrder`, llama a `super().__init__(order_id, total)` y sobrescribe `get_total()` para retornar `self.total * 0.90`.
+- Imprime tanto el `self.total` original como el resultado con descuento de `get_total()` para mostrar la diferencia.
+
+## Ejercicio 21: Jerarquía de clases Vehicle con Bike, Truck y Bus
+
+**Pista:**
+- Define una clase base `Vehicle` con un atributo `max_speed` establecido en `0` y un método `describe()` que lo imprima.
+- Crea las subclases `Bike`, `Truck` y `Bus`, cada una estableciendo su propio `max_speed` en `__init__`.
+- Sobrescribe `describe()` en cada subclase, o confía en el método del padre si el formato de salida es el mismo.
+
+## Ejercicio 22: Identificar la clase de un objeto usando type()
+
+**Pista:**
+- Define algunas clases simples (pueden tener cuerpos vacíos usando `pass`).
+- Crea un objeto de cada clase.
+- Usa `type(obj).__name__` para obtener el nombre de la clase como cadena, o compara `type(obj)` directamente con la clase misma (por ejemplo, `type(obj) == Dog`).
+
+## Ejercicio 23: Verificación de tipos con isinstance() e issubclass()
+
+**Pista:**
+- Define una clase base `Animal` y una subclase `Dog` que herede de ella.
+- Usa `isinstance(obj, ClassName)` para verificar si un objeto es instancia de una clase o de cualquiera de sus clases padre.
+- Usa `issubclass(ChildClass, ParentClass)` para verificar si una clase hereda de otra.
+- Ten en cuenta que `isinstance(d, Animal)` retorna `True` aunque `d` fue creado desde `Dog`, porque `Dog` hereda de `Animal`.
+
+## Ejercicio 24: Suma de vectores usando sobrecarga de __add__
+
+**Pista:**
+- Define una clase `Vector` con atributos `x` e `y` en `__init__`.
+- Implementa `__add__(self, other)` para retornar un nuevo `Vector` cuyo `x` sea `self.x + other.x` y cuyo `y` sea `self.y + other.y`.
+- Implementa `__repr__` o `__str__` para controlar cómo se imprime el objeto.
+- Pruébalo escribiendo `v1 + v2` e imprimiendo el resultado.
+
+## Ejercicio 25: Longitud del carrito usando sobrecarga de __len__
+
+**Pista:**
+- Define una clase `Cart` con un `__init__` que inicialice una lista vacía `self.items = []`.
+- Agrega un método `add_item(item)` que agregue elementos a `self.items`.
+- Implementa `__len__(self)` para retornar `len(self.items)`.
+- Una vez definido `__len__`, Python lo usará automáticamente cada vez que llames a `len(cart)` sobre tu objeto.
