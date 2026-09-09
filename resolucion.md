@@ -395,3 +395,369 @@ print("Total fare with maintenance fee:", taxi.total_fare())
 - **`total_fare()`**: Retorna la suma de la tarifa base y la tarifa de mantenimiento, demostrando cómo las clases hijas pueden extender el comportamiento del padre sin modificarlo.
 
 ---
+## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
+
+**Solución y explicación:**
+
+```python
+class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+
+dog = Dog()
+cat = Cat()
+
+print("Dog says:", dog.speak())
+print("Cat says:", cat.speak())
+```
+
+- **`class Animal`**: Actúa como clase base con un método `speak()` por defecto, estableciendo una interfaz común para todas las subclases.
+- **`class Dog(Animal)`**: Hereda de `Animal` y sobrescribe `speak()` para retornar `"Woof!"`, reemplazando la implementación genérica del padre.
+- **`class Cat(Animal)`**: De forma similar, sobrescribe `speak()` para retornar `"Meow!"`.
+- **Sobrescritura de métodos**: Cuando se llama a `speak()` sobre un objeto `Dog` o `Cat`, Python usa la versión de la subclase, no la del padre. Este es el fundamento del polimorfismo.
+
+---
+
+## Ejercicio 17: Lógica de pago para empleados de tiempo completo vs medio tiempo
+
+**Solución y explicación:**
+
+```python
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def calculate_pay(self):
+        return 0
+
+class FullTimeEmployee(Employee):
+    def __init__(self, name, annual_salary):
+        super().__init__(name)
+        self.annual_salary = annual_salary
+
+    def calculate_pay(self):
+        return self.annual_salary / 12
+
+class PartTimeEmployee(Employee):
+    def __init__(self, name, hourly_rate, hours_worked):
+        super().__init__(name)
+        self.hourly_rate = hourly_rate
+        self.hours_worked = hours_worked
+
+    def calculate_pay(self):
+        return self.hourly_rate * self.hours_worked
+
+
+ft = FullTimeEmployee("Alice", 60000)
+pt = PartTimeEmployee("Bob", 500, 20)
+
+print(f"{ft.name}'s monthly pay: {ft.calculate_pay()}")
+print(f"{pt.name}'s monthly pay: {pt.calculate_pay()}")
+```
+
+- **`class Employee`**: Sirve como clase base que contiene el atributo compartido `name` y un `calculate_pay()` por defecto que retorna `0`.
+- **`FullTimeEmployee.calculate_pay()`**: Divide el salario anual entre 12 para obtener el pago mensual, usando el operador `/` de Python 3, que retorna un flotante.
+- **`PartTimeEmployee.calculate_pay()`**: Multiplica `hourly_rate` por `hours_worked`, modelando un contrato de pago por hora.
+- **`super().__init__(name)`**: Usado en ambas subclases para delegar la asignación de `name` al padre, evitando la duplicación de código.
+
+---
+
+## Ejercicio 18: Subclases Shape con métodos area() personalizados
+
+**Solución y explicación:**
+
+```python
+class Shape:
+    def area(self):
+        return 0
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return round(3.14159 * self.radius ** 2, 2)
+
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+
+    def area(self):
+        return self.side ** 2
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+
+    def area(self):
+        return 0.5 * self.base * self.height
+
+
+shapes = [Circle(7), Square(4), Triangle(6, 8)]
+for shape in shapes:
+    print(f"{type(shape).__name__} area: {shape.area()}")
+```
+
+- **`class Shape`**: Proporciona una interfaz común con un `area()` por defecto que retorna `0`. Se espera que todas las subclases sobrescriban este método.
+- **`Circle.area()`**: Aplica la fórmula `pi * r^2`. El resultado se redondea a 2 decimales usando `round()` para una salida limpia.
+- **`Square.area()`**: Retorna `side ** 2`, la fórmula de área más simple.
+- **`type(shape).__name__`**: Obtiene dinámicamente el nombre de la clase de cada objeto en tiempo de ejecución, haciendo reutilizable el bucle de impresión sin necesidad de escribir los nombres a mano.
+
+---
+
+## Ejercicio 19: Subclases Media con atributos específicos por tipo
+
+**Solución y explicación:**
+
+```python
+class Media:
+    def __init__(self, title, price):
+        self.title = title
+        self.price = price
+
+    def describe(self):
+        return f"{self.title} - Rs.{self.price}"
+
+class Book(Media):
+    def __init__(self, title, price, author):
+        super().__init__(title, price)
+        self.author = author
+
+    def describe(self):
+        return f"Book: {self.title} by {self.author} - Rs.{self.price}"
+
+class Magazine(Media):
+    def __init__(self, title, price, frequency):
+        super().__init__(title, price)
+        self.frequency = frequency
+
+    def describe(self):
+        return f"Magazine: {self.title} ({self.frequency}) - Rs.{self.price}"
+
+class DVD(Media):
+    def __init__(self, title, price, duration):
+        super().__init__(title, price)
+        self.duration = duration
+
+    def describe(self):
+        return f"DVD: {self.title}, {self.duration} mins - Rs.{self.price}"
+
+
+items = [
+    Book("Clean Code", 499, "Robert C. Martin"),
+    Magazine("Wired", 150, "Monthly"),
+    DVD("Inception", 299, 148)
+]
+
+for item in items:
+    print(item.describe())
+```
+
+- **`class Media`**: Almacena los atributos compartidos `title` y `price`, comunes a todos los tipos de medios, y proporciona un `describe()` genérico como respaldo.
+- **`super().__init__(title, price)`**: Usado en cada subclase para evitar repetir la asignación de los atributos compartidos, manteniendo el código DRY (No te Repitas).
+- **Atributos únicos**: `author`, `frequency` y `duration` son específicos de cada subclase y no pertenecerían a la clase base, ya que no todos los tipos de medios los comparten.
+- **Iterar con `describe()`**: Llamar al mismo método en distintos objetos y obtener distintas salidas es polimorfismo en la práctica.
+
+---
+
+## Ejercicio 20: Subclase DiscountedOrder con 10% de descuento
+
+**Solución y explicación:**
+
+```python
+class Order:
+    def __init__(self, order_id, total):
+        self.order_id = order_id
+        self.total = total
+
+    def get_total(self):
+        return self.total
+
+class DiscountedOrder(Order):
+    def __init__(self, order_id, total):
+        super().__init__(order_id, total)
+
+    def get_total(self):
+        return self.total * 0.90
+
+
+order = DiscountedOrder("ORD001", 1200)
+print("Order ID:", order.order_id)
+print("Original Total:", order.total)
+print("Discounted Total:", order.get_total())
+```
+
+- **`class Order`**: La clase padre almacena `order_id` y `total`, y `get_total()` simplemente retorna el monto completo sin ninguna modificación.
+- **`DiscountedOrder.get_total()`**: Sobrescribe el método del padre para aplicar una reducción del 10% multiplicando `self.total` por `0.90`. La clase padre nunca se modifica.
+- **`order.total` vs `order.get_total()`**: Acceder directamente a `self.total` sigue retornando el valor original, mientras que `get_total()` retorna el valor con descuento. Esta distinción es importante para mantener intactos los datos originales.
+- **Principio de abierto/cerrado**: La clase `Order` está cerrada a la modificación pero abierta a la extensión. `DiscountedOrder` la extiende sin tocar el código original.
+
+---
+
+## Ejercicio 21: Jerarquía de clases Vehicle con Bike, Truck y Bus
+
+**Solución y explicación:**
+
+```python
+class Vehicle:
+    def __init__(self, max_speed):
+        self.max_speed = max_speed
+
+    def describe(self):
+        print(f"{type(self).__name__} max speed: {self.max_speed} km/h")
+
+class Bike(Vehicle):
+    def __init__(self):
+        super().__init__(120)
+
+class Truck(Vehicle):
+    def __init__(self):
+        super().__init__(90)
+
+class Bus(Vehicle):
+    def __init__(self):
+        super().__init__(100)
+
+
+vehicles = [Bike(), Truck(), Bus()]
+for v in vehicles:
+    v.describe()
+```
+
+- **`class Vehicle`**: Acepta `max_speed` como parámetro y proporciona un método `describe()` compartido usado por todas las subclases.
+- **Constructores de las subclases**: Cada subclase fija su propio valor de `max_speed` y lo pasa hacia el padre mediante `super().__init__()`. No se necesitan atributos adicionales en las subclases.
+- **`type(self).__name__`**: Dentro del `describe()` de la clase base, esto obtiene el nombre real de la clase en tiempo de ejecución (`Bike`, `Truck` o `Bus`), haciendo el método reutilizable sin necesidad de sobrescribirlo en cada subclase.
+- **Recorrer una lista mixta**: Los tres objetos se almacenan en una sola lista y se recorren de manera uniforme, un ejemplo directo de comportamiento polimórfico.
+
+---
+
+## Ejercicio 22: Identificar la clase de un objeto usando type()
+
+**Solución y explicación:**
+
+```python
+class Dog:
+    pass
+
+class Cat:
+    pass
+
+class Vehicle:
+    pass
+
+
+d = Dog()
+c = Cat()
+v = Vehicle()
+
+objects = {"d": d, "c": c, "v": v}
+
+for name, obj in objects.items():
+    print(f"{name} is of type: {type(obj).__name__}")
+```
+
+- **`class Dog: pass`**: La palabra clave `pass` crea un cuerpo de clase válido pero vacío. Esto es útil cuando la estructura de la clase no es relevante para el objetivo del ejercicio.
+- **`type(obj)`**: Retorna la clase (objeto de tipo) a partir de la cual se creó `obj`. Por ejemplo, `type(d)` retorna `<class '__main__.Dog'>`.
+- **`type(obj).__name__`**: El atributo `.__name__` sobre el objeto de tipo retornado da solo el nombre simple de la clase como cadena, como `"Dog"`, sin el prefijo del módulo.
+- **Alternativa – `isinstance()`**: Mientras que `type()` verifica la clase exacta, `isinstance(d, Dog)` también retorna `True` para subclases. Usa `type()` cuando necesites una coincidencia exacta, e `isinstance()` cuando la herencia deba tenerse en cuenta.
+
+---
+
+## Ejercicio 23: Verificación de tipos con isinstance() e issubclass()
+
+**Solución y explicación:**
+
+```python
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+
+
+d = Dog()
+
+print("Is d an instance of Dog?", isinstance(d, Dog))
+print("Is d an instance of Animal?", isinstance(d, Animal))
+print("Is Dog a subclass of Animal?", issubclass(Dog, Animal))
+print("Is Animal a subclass of Dog?", issubclass(Animal, Dog))
+```
+
+- **`isinstance(d, Dog)`**: Retorna `True` porque `d` fue creado directamente a partir de la clase `Dog`.
+- **`isinstance(d, Animal)`**: También retorna `True` porque `Dog` hereda de `Animal`. Esta conciencia de la herencia es lo que hace que `isinstance()` sea más útil que una comparación directa con `type()` en la mayoría de los escenarios reales.
+- **`issubclass(Dog, Animal)`**: Retorna `True` porque `Dog` está definida con `Animal` como su padre. Esto funciona sobre las clases mismas, no sobre las instancias.
+- **`issubclass(Animal, Dog)`**: Retorna `False` porque la relación es unidireccional. El padre no hereda del hijo.
+
+---
+
+## Ejercicio 24: Suma de vectores usando sobrecarga de __add__
+
+**Solución y explicación:**
+
+```python
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+
+
+v1 = Vector(2, 3)
+v2 = Vector(4, 1)
+
+result = v1 + v2
+print(result)
+```
+
+- **`__add__(self, other)`**: Python llama a este método automáticamente cuando se usa el operador `+` entre dos objetos `Vector`. `self` es el operando izquierdo y `other` el derecho.
+- **Retorna un nuevo `Vector`**: En lugar de modificar `self` en el lugar, el método crea y retorna un objeto `Vector` nuevo. Esto mantiene los objetos inmutables bajo la suma, que es el comportamiento esperado para tipos matemáticos.
+- **`__repr__`**: Define la representación en cadena del objeto usada por `print()` y por la consola interactiva. Sin él, `print(result)` mostraría algo como `<__main__.Vector object at 0x...>`.
+- **Sobrecarga de operadores**: El mismo patrón aplica a otros operadores, como `__sub__` para `-`, `__mul__` para `*` y `__eq__` para `==`, haciendo que las clases personalizadas se sientan como tipos nativos de Python.
+
+---
+
+## Ejercicio 25: Longitud del carrito usando sobrecarga de __len__
+
+**Solución y explicación:**
+
+```python
+class Cart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        self.items.append(item)
+
+    def __len__(self):
+        return len(self.items)
+
+
+cart = Cart()
+cart.add_item("apple")
+cart.add_item("banana")
+cart.add_item("mango")
+
+print("Number of items in cart:", len(cart))
+```
+
+- **`self.items = []`**: Inicializa la lista interna que almacena el contenido del carrito. Cada instancia obtiene su propia lista independiente.
+- **`__len__(self)`**: Python llama a esto automáticamente cuando se usa `len(cart)`. Delega en el `len()` incorporado sobre la lista interna, que ya sabe cómo contar sus elementos.
+- **Diseño basado en protocolo**: Al implementar `__len__`, tu objeto `Cart` ahora participa en el protocolo de secuencias de Python. Esto también habilita verificaciones de veracidad: un objeto cuyo `__len__` retorna `0` se trata como `False` en un contexto booleano.
+- **Métodos dunder relacionados**: Puedes extender este patrón con `__getitem__` para soportar indexado (por ejemplo, `cart[0]`) y con `__iter__` para soportar recorrer el carrito directamente.
+
+---
