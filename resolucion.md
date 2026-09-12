@@ -395,6 +395,7 @@ print("Total fare with maintenance fee:", taxi.total_fare())
 - **`total_fare()`**: Retorna la suma de la tarifa base y la tarifa de mantenimiento, demostrando cómo las clases hijas pueden extender el comportamiento del padre sin modificarlo.
 
 ---
+
 ## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
 
 **Solución y explicación:**

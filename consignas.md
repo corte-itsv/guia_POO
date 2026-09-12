@@ -192,6 +192,7 @@ BMW - Color: Red, Speed: 200
 **Entrada dada:** `base_fare = 500`
 
 **Salida esperada:** `Total fare with maintenance fee: 550.0`
+
 ## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
 
 **Consigna:** Escribe un programa en Python que defina una clase base `Animal` con un método `speak()`, y luego lo sobrescriba en las subclases `Dog` y `Cat` para que retornen sus respectivos sonidos.
