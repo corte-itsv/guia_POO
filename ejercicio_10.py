@@ -1,6 +1,6 @@
 class Notebook:
-    def __init__(self, note_list):
-        self.note_list = note_list
+    def __init__(self, notes):
+        self.note_list = notes
         
     def add_note(self, note):
         self.note_list.append(note)
