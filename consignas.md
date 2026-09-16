@@ -338,3 +338,66 @@ Is Animal a subclass of Dog? False
 **Entrada dada:** Un carrito con los artículos `["apple", "banana", "mango"]`
 
 **Salida esperada:** `Number of items in cart: 3`
+
+## Ejercicio 26: Clase Flight con verificación de capacidad de pasajeros
+
+**Consigna:** Escribe un programa en Python que cree una clase `Passenger` y una clase `Flight`. La clase `Flight` debe gestionar una lista de objetos `Passenger` y bloquear nuevas reservas cuando se alcance la capacidad de asientos.
+
+**Propósito:** Este ejercicio modela un escenario real de composición de objetos, donde una clase posee y gestiona una colección de otra clase. También enseña la imposición de límites, donde las reglas de negocio (límites de capacidad) se integran directamente en los métodos de la clase.
+
+**Entrada dada:** Un `Flight` con capacidad `2`, y luego tres intentos de reserva
+
+**Salida esperada:**
+
+```
+Alice booked on Flight AI202.  
+Bob booked on Flight AI202.  
+Sorry, Flight AI202 is fully booked.
+```
+
+## Ejercicio 27: Clase Zoo que alimenta a todos los animales
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Animal` con un método `eat()`, cree algunas subclases con sus propias implementaciones de `eat()`, y construya una clase `Zoo` que mantenga una lista de animales y llame a `eat()` en todos ellos mediante un método `feed_all()`.
+
+**Propósito:** Este ejercicio combina composición con polimorfismo. La clase `Zoo` no necesita saber el tipo específico de cada animal; simplemente llama a la interfaz compartida `eat()` en cada objeto de su colección, y cada animal responde a su manera.
+
+**Entrada dada:** Un zoológico con un `Lion`, un `Elephant` y un `Parrot`
+
+**Salida esperada:**
+
+```
+Lion eats meat.  
+Elephant eats grass.  
+Parrot eats seeds.
+```
+
+## Ejercicio 28: Clase Character con lógica automática de subida de nivel
+
+**Consigna:** Escribe un programa en Python que cree una clase `Character` con atributos `health`, `exp` y `level`. El personaje debe subir de nivel automáticamente y reiniciar la experiencia (`exp`) cada vez que la experiencia acumulada alcance o supere 100.
+
+**Propósito:** Este ejercicio muestra cómo integrar lógica de videojuego directamente en una clase usando un método que gestiona transiciones de estado. También demuestra cómo manejar el excedente (experiencia sobrante después de subir de nivel) y mantener sincronizados varios atributos relacionados.
+
+**Entrada dada:** `Character("Aria", health=100)`, y luego `gain_exp(60)` dos veces
+
+**Salida esperada:**
+
+```
+Aria gained 60 exp. (Total: 60)  
+Aria gained 60 exp. Level up! Now Level 2. (Remaining exp: 20)
+```
+
+## Ejercicio 29: Clase Playlist con agregar, quitar y mezclar
+
+**Consigna:** Escribe un programa en Python que defina una clase `Song` y una clase `Playlist`. La `Playlist` debe permitir agregar canciones, eliminar canciones por título, y mezclar el orden de la lista de forma aleatoria.
+
+**Propósito:** Este ejercicio refuerza la composición de objetos, la manipulación de listas y el uso de la biblioteca estándar. Gestionar una colección de objetos con operaciones de agregar, quitar y reordenar es un patrón presente en reproductores multimedia, gestores de tareas y muchas aplicaciones del mundo real.
+
+**Entrada dada:** Una playlist con tres canciones, luego una eliminación y un mezclado
+
+**Salida esperada:**
+
+```
+Playlist: Blinding Lights, Levitating, Peaches  
+Removed: Levitating  
+After shuffle: (order will vary)
+```
