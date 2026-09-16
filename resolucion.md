@@ -762,3 +762,176 @@ print("Number of items in cart:", len(cart))
 - **Métodos dunder relacionados**: Puedes extender este patrón con `__getitem__` para soportar indexado (por ejemplo, `cart[0]`) y con `__iter__` para soportar recorrer el carrito directamente.
 
 ---
+
+## Ejercicio 26: Clase Flight con verificación de capacidad de pasajeros
+
+**Solución y explicación:**
+
+```python
+class Passenger:
+    def __init__(self, name):
+        self.name = name
+
+class Flight:
+    def __init__(self, flight_number, capacity):
+        self.flight_number = flight_number
+        self.capacity = capacity
+        self.passengers = []
+
+    def book(self, passenger):
+        if len(self.passengers) < self.capacity:
+            self.passengers.append(passenger)
+            print(f"{passenger.name} booked on Flight {self.flight_number}.")
+        else:
+            print(f"Sorry, Flight {self.flight_number} is fully booked.")
+
+
+flight = Flight("AI202", 2)
+flight.book(Passenger("Alice"))
+flight.book(Passenger("Bob"))
+flight.book(Passenger("Charlie"))
+```
+
+- **`class Passenger`**: Una clase de datos simple que contiene el nombre de un pasajero. En un sistema más grande, también podría almacenar un número de pasaporte, preferencia de asiento o referencia de reserva.
+- **`self.passengers = []`**: Cada instancia de `Flight` mantiene su propia lista. Esto es composición de objetos: el `Flight` posee una colección de objetos `Passenger`.
+- **Verificación de capacidad en `book()`**: La condition de guardia `len(self.passengers) < self.capacity` impone la regla de negocio en el punto de ingreso de datos, evitando que la lista crezca más allá de su límite.
+- **Pasar objetos como argumentos**: `flight.book(Passenger("Alice"))` crea un objeto `Passenger` en línea y lo pasa directamente. El método de `Flight` luego trabaja con los atributos del objeto, demostrando la comunicación entre objetos.
+
+---
+
+## Ejercicio 27: Clase Zoo que alimenta a todos los animales
+
+**Solución y explicación:**
+
+```python
+class Animal:
+    def eat(self):
+        return "eating."
+
+class Lion(Animal):
+    def eat(self):
+        return "Lion eats meat."
+
+class Elephant(Animal):
+    def eat(self):
+        return "Elephant eats grass."
+
+class Parrot(Animal):
+    def eat(self):
+        return "Parrot eats seeds."
+
+class Zoo:
+    def __init__(self):
+        self.animals = []
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+
+    def feed_all(self):
+        for animal in self.animals:
+            print(animal.eat())
+
+
+zoo = Zoo()
+zoo.add_animal(Lion())
+zoo.add_animal(Elephant())
+zoo.add_animal(Parrot())
+
+zoo.feed_all()
+```
+
+- **`class Zoo`**: Actúa como clase contenedora que gestiona una colección heterogénea de objetos `Animal`. No le importa el subtipo específico de cada animal que contiene.
+- **`feed_all()`**: Recorre `self.animals` y llama a `eat()` en cada uno. Como cada animal sobrescribe `eat()`, Python despacha automáticamente al método correcto de la subclase. Esto es polimorfismo en tiempo de ejecución.
+- **Composición sobre herencia**: `Zoo` no hereda de `Animal`. En cambio, contiene animales. Esto es una relación "tiene un", a diferencia de la relación "es un" de la herencia.
+- **Extensibilidad**: Agregar un nuevo tipo de animal (por ejemplo, `Penguin`) solo requiere crear una nueva subclase con su propio `eat()`. El código de `Zoo` y `feed_all()` no necesita cambios.
+
+---
+
+## Ejercicio 28: Clase Character con lógica automática de subida de nivel
+
+**Solución y explicación:**
+
+```python
+class Character:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+        self.exp = 0
+        self.level = 1
+
+    def gain_exp(self, amount):
+        self.exp += amount
+        if self.exp >= 100:
+            self.exp -= 100
+            self.level += 1
+            print(f"{self.name} gained {amount} exp. Level up! Now Level {self.level}. (Remaining exp: {self.exp})")
+        else:
+            print(f"{self.name} gained {amount} exp. (Total: {self.exp})")
+
+
+hero = Character("Aria", health=100)
+hero.gain_exp(60)
+hero.gain_exp(60)
+```
+
+- **`self.exp = 0` y `self.level = 1`**: Estos valores por defecto se establecen en `__init__` en lugar de pasarse como parámetros, ya que es razonable que todo personaje nuevo comience en nivel 1 con cero experiencia.
+- **`self.exp += amount`**: Acumula experiencia a través de múltiples llamadas. El total acumulado se verifica después de cada ganancia, no solo una vez.
+- **`self.exp -= 100`**: Resta exactamente 100 en lugar de reiniciar a cero, de modo que cualquier experiencia ganada por encima del umbral se traslada al siguiente nivel. Por ejemplo, ganar 60 de experiencia sobre otros 60 da un total de 120; después de subir de nivel, quedan 20 de experiencia.
+- **Extender la lógica**: Este patrón admite múltiples subidas de nivel en una sola llamada (por ejemplo, ganar 250 de experiencia de una vez) cambiando el `if` por un bucle `while self.exp >= 100`, haciendo el sistema robusto ante grandes recompensas de experiencia.
+
+---
+
+## Ejercicio 29: Clase Playlist con agregar, quitar y mezclar
+
+**Solución y explicación:**
+
+```python
+import random
+
+class Song:
+    def __init__(self, title, artist):
+        self.title = title
+        self.artist = artist
+
+class Playlist:
+    def __init__(self, name):
+        self.name = name
+        self.songs = []
+
+    def add_song(self, song):
+        self.songs.append(song)
+
+    def remove_song(self, title):
+        original_count = len(self.songs)
+        self.songs = [s for s in self.songs if s.title != title]
+        if len(self.songs) < original_count:
+            print(f"Removed: {title}")
+        else:
+            print(f"Song '{title}' not found in playlist.")
+
+    def shuffle(self):
+        random.shuffle(self.songs)
+
+    def display(self):
+        titles = [s.title for s in self.songs]
+        print(f"Playlist: {', '.join(titles)}")
+
+
+playlist = Playlist("My Mix")
+playlist.add_song(Song("Blinding Lights", "The Weeknd"))
+playlist.add_song(Song("Levitating", "Dua Lipa"))
+playlist.add_song(Song("Peaches", "Justin Bieber"))
+
+playlist.display()
+playlist.remove_song("Levitating")
+playlist.shuffle()
+print("After shuffle:", end=" ")
+playlist.display()
+```
+
+- **`class Song`**: Un objeto de datos ligero que contiene el `title` y el `artist` de una canción. La `Playlist` almacena estos objetos en lugar de simples cadenas, facilitando mostrar o filtrar por cualquiera de los dos atributos.
+- **`remove_song()` con comprensión de listas**: `[s for s in self.songs if s.title != title]` construye una nueva lista que excluye la canción coincidente y la reasigna a `self.songs`. Comparar el conteo antes y después confirma si realmente ocurrió una eliminación.
+- **`random.shuffle(self.songs)`**: Mezcla la lista en el lugar, lo que significa que no se crea ninguna lista nueva. El orden de `self.songs` se aleatoriza directamente, y la salida será distinta en cada ejecución.
+- **`display()`**: Usa una comprensión de listas para extraer solo los títulos y los une con `', '.join()`, produciendo un resumen limpio de una sola línea del estado actual de la playlist.
+
+---
