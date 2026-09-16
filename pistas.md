@@ -106,6 +106,8 @@
 - Crea una clase `Taxi` que herede de `Vehicle`.
 - En `Taxi.__init__`, llama a `super().__init__(base_fare)` para inicializar al padre, y luego calcula la tarifa de mantenimiento como `base_fare * 0.10`.
 - Agrega un método `total_fare()` que retorne `self.base_fare + self.maintenance_fee`.
+<<<<<<< HEAD
+=======
 
 ## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
 
@@ -213,3 +215,4 @@
 - Define una clase `Playlist` con una lista interna `self.songs = []` y un método `add_song(song)` que agregue elementos a ella.
 - En `remove_song(title)`, usa una comprensión de listas para filtrar la canción cuyo `title` coincida con la cadena dada.
 - En `shuffle()`, usa `random.shuffle(self.songs)` del módulo `random` para aleatorizar el orden en el lugar.
+>>>>>>> origin/main
