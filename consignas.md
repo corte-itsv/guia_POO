@@ -192,3 +192,212 @@ BMW - Color: Red, Speed: 200
 **Entrada dada:** `base_fare = 500`
 
 **Salida esperada:** `Total fare with maintenance fee: 550.0`
+## Ejercicio 16: Polimorfismo con speak() en Dog y Cat
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Animal` con un método `speak()`, y luego lo sobrescriba en las subclases `Dog` y `Cat` para que retornen sus respectivos sonidos.
+
+**Propósito:** Este ejercicio introduce la sobrescritura de métodos, uno de los pilares centrales del polimorfismo en OOP. Muestra cómo distintas subclases pueden compartir la misma interfaz pero proporcionar su propio comportamiento específico.
+
+**Entrada dada:** Objetos de las clases `Dog` y `Cat`
+
+**Salida esperada:**
+
+```
+Dog says: Woof!
+Cat says: Meow!
+```
+
+## Ejercicio 17: Lógica de pago para empleados de tiempo completo vs medio tiempo
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Employee`, y luego cree las subclases `FullTimeEmployee` y `PartTimeEmployee`, cada una implementando una lógica distinta para calcular el pago.
+
+**Propósito:** Este ejercicio modela un escenario común de recursos humanos y enseña cómo usar la herencia para compartir atributos comunes mientras se permite que cada subclase defina su propia lógica de negocio para calcular el pago.
+
+**Entrada dada:** `FullTimeEmployee("Alice", 60000)` y `PartTimeEmployee("Bob", 500, 20)`
+
+**Salida esperada:**
+
+```
+Alice's monthly pay: 5000.0
+Bob's monthly pay: 10000
+```
+
+## Ejercicio 18: Subclases Shape con métodos area() personalizados
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Shape` con un método `area()`, y luego lo implemente en las subclases `Circle`, `Square` y `Triangle` usando las fórmulas geométricas correspondientes.
+
+**Propósito:** Este ejercicio es una demostración clásica de polimorfismo. Cada figura comparte la misma interfaz `area()` pero proporciona un cálculo completamente distinto, mostrando cómo la OOP maneja de forma limpia la variación del mundo real.
+
+**Entrada dada:** `Circle(7)`, `Square(4)`, `Triangle(6, 8)`
+
+**Salida esperada:**
+
+```
+Circle area: 153.94
+Square area: 16
+Triangle area: 24.0
+```
+
+## Ejercicio 19: Subclases Media con atributos específicos por tipo
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Media`, y luego cree las subclases `Book`, `Magazine` y `DVD`, cada una con atributos específicos de su tipo y un método `describe()`.
+
+**Propósito:** Este ejercicio muestra cómo la herencia puede modelar una taxonomía de objetos relacionados. Cada tipo de medio comparte una identidad común (título, precio) pero lleva atributos únicos específicos de su formato, reflejando sistemas reales de bibliotecas o inventarios.
+
+**Entrada dada:** `Book("Clean Code", 499, "Robert C. Martin")`, `Magazine("Wired", 150, "Monthly")`, `DVD("Inception", 299, 148)`
+
+**Salida esperada:**
+
+```
+Book: Clean Code by Robert C. Martin - Rs.499
+Magazine: Wired (Monthly) - Rs.150
+DVD: Inception, 148 mins - Rs.299
+```
+
+## Ejercicio 20: Subclase DiscountedOrder con 10% de descuento
+
+**Consigna:** Escribe un programa en Python que cree una clase `Order` con un monto total, y luego cree una subclase `DiscountedOrder` que aplique un descuento del 10% al total.
+
+**Propósito:** Este ejercicio modela un patrón común de comercio electrónico y muestra cómo una clase hija puede extender el comportamiento de un padre modificando un valor calculado, sin cambiar en absoluto la clase padre.
+
+**Entrada dada:** `DiscountedOrder("ORD001", 1200)`
+
+**Salida esperada:**
+
+```
+Order ID: ORD001
+Original Total: 1200
+Discounted Total: 1080.0
+```
+
+## Ejercicio 21: Jerarquía de clases Vehicle con Bike, Truck y Bus
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Vehicle` y cree las subclases `Bike`, `Truck` y `Bus`, cada una definiendo un atributo `max_speed` único y un método `describe()`.
+
+**Propósito:** Este ejercicio refuerza el concepto de jerarquías de clases y muestra cómo las subclases pueden especializar un modelo compartido con sus propios valores de atributos, reflejando cómo se categorizan los sistemas de transporte del mundo real.
+
+**Entrada dada:** Objetos de las clases `Bike`, `Truck` y `Bus`
+
+**Salida esperada:**
+
+```
+Bike max speed: 120 km/h
+Truck max speed: 90 km/h
+Bus max speed: 100 km/h
+```
+
+## Ejercicio 22: Identificar la clase de un objeto usando type()
+
+**Consigna:** Escribe un programa en Python que cree objetos de múltiples clases y use la función incorporada `type()` para identificar a qué clase pertenece cada objeto.
+
+**Propósito:** Este ejercicio enseña cómo Python rastrea el tipo de cada objeto en tiempo de ejecución. Entender `type()` es esencial para depurar, para el despacho dinámico, y para escribir código flexible que reaccione de forma distinta según el tipo de objeto que recibe.
+
+**Entrada dada:** Objetos de las clases `Dog`, `Cat` y `Vehicle`
+
+**Salida esperada:**
+
+```
+d is of type: Dog
+c is of type: Cat
+v is of type: Vehicle
+```
+
+## Ejercicio 23: Verificación de tipos con isinstance() e issubclass()
+
+**Consigna:** Escribe un programa en Python que use `isinstance()` para verificar si un objeto es instancia de una clase dada, y `issubclass()` para verificar si una clase es subclase de otra.
+
+**Propósito:** Este ejercicio enseña dos de las herramientas de inspección de tipos más importantes de Python. A diferencia de `type()`, ambas funciones consideran la herencia, haciéndolas esenciales para escribir código flexible y seguro que maneje tipos de objetos mixtos con elegancia.
+
+**Entrada dada:** Una clase `Dog` que hereda de `Animal`, y una instancia `d = Dog()`
+
+**Salida esperada:**
+
+```
+Is d an instance of Dog? True
+Is d an instance of Animal? True
+Is Dog a subclass of Animal? True
+Is Animal a subclass of Dog? False
+```
+
+## Ejercicio 24: Suma de vectores usando sobrecarga de __add__
+
+**Consigna:** Escribe un programa en Python que cree una clase `Vector` que represente un vector 2D, e implemente el método dunder `__add__` para que dos objetos `Vector` puedan sumarse usando el operador `+`.
+
+**Propósito:** Este ejercicio introduce la sobrecarga de operadores, una potente característica de OOP que permite que tus clases personalizadas se comporten como los tipos incorporados. Implementar `__add__` hace que tus objetos se integren de forma natural con la sintaxis de Python.
+
+**Entrada dada:** `v1 = Vector(2, 3)` y `v2 = Vector(4, 1)`
+
+**Salida esperada:** `Vector(6, 4)`
+
+## Ejercicio 25: Longitud del carrito usando sobrecarga de __len__
+
+**Consigna:** Escribe un programa en Python que cree una clase `Cart` que almacene una lista de artículos, e implemente `__len__` para que al llamar `len(cart)` se retorne la cantidad de artículos actualmente en el carrito.
+
+**Propósito:** Este ejercicio introduce el método dunder `__len__`, que permite que tu clase personalizada se integre con la función incorporada `len()` de Python. Esto forma parte del modelo de datos de Python y hace que tus objetos se comporten como secuencias o contenedores nativos.
+
+**Entrada dada:** Un carrito con los artículos `["apple", "banana", "mango"]`
+
+**Salida esperada:** `Number of items in cart: 3`
+
+## Ejercicio 26: Clase Flight con verificación de capacidad de pasajeros
+
+**Consigna:** Escribe un programa en Python que cree una clase `Passenger` y una clase `Flight`. La clase `Flight` debe gestionar una lista de objetos `Passenger` y bloquear nuevas reservas cuando se alcance la capacidad de asientos.
+
+**Propósito:** Este ejercicio modela un escenario real de composición de objetos, donde una clase posee y gestiona una colección de otra clase. También enseña la imposición de límites, donde las reglas de negocio (límites de capacidad) se integran directamente en los métodos de la clase.
+
+**Entrada dada:** Un `Flight` con capacidad `2`, y luego tres intentos de reserva
+
+**Salida esperada:**
+
+```
+Alice booked on Flight AI202.  
+Bob booked on Flight AI202.  
+Sorry, Flight AI202 is fully booked.
+```
+
+## Ejercicio 27: Clase Zoo que alimenta a todos los animales
+
+**Consigna:** Escribe un programa en Python que defina una clase base `Animal` con un método `eat()`, cree algunas subclases con sus propias implementaciones de `eat()`, y construya una clase `Zoo` que mantenga una lista de animales y llame a `eat()` en todos ellos mediante un método `feed_all()`.
+
+**Propósito:** Este ejercicio combina composición con polimorfismo. La clase `Zoo` no necesita saber el tipo específico de cada animal; simplemente llama a la interfaz compartida `eat()` en cada objeto de su colección, y cada animal responde a su manera.
+
+**Entrada dada:** Un zoológico con un `Lion`, un `Elephant` y un `Parrot`
+
+**Salida esperada:**
+
+```
+Lion eats meat.  
+Elephant eats grass.  
+Parrot eats seeds.
+```
+
+## Ejercicio 28: Clase Character con lógica automática de subida de nivel
+
+**Consigna:** Escribe un programa en Python que cree una clase `Character` con atributos `health`, `exp` y `level`. El personaje debe subir de nivel automáticamente y reiniciar la experiencia (`exp`) cada vez que la experiencia acumulada alcance o supere 100.
+
+**Propósito:** Este ejercicio muestra cómo integrar lógica de videojuego directamente en una clase usando un método que gestiona transiciones de estado. También demuestra cómo manejar el excedente (experiencia sobrante después de subir de nivel) y mantener sincronizados varios atributos relacionados.
+
+**Entrada dada:** `Character("Aria", health=100)`, y luego `gain_exp(60)` dos veces
+
+**Salida esperada:**
+
+```
+Aria gained 60 exp. (Total: 60)  
+Aria gained 60 exp. Level up! Now Level 2. (Remaining exp: 20)
+```
+
+## Ejercicio 29: Clase Playlist con agregar, quitar y mezclar
+
+**Consigna:** Escribe un programa en Python que defina una clase `Song` y una clase `Playlist`. La `Playlist` debe permitir agregar canciones, eliminar canciones por título, y mezclar el orden de la lista de forma aleatoria.
+
+**Propósito:** Este ejercicio refuerza la composición de objetos, la manipulación de listas y el uso de la biblioteca estándar. Gestionar una colección de objetos con operaciones de agregar, quitar y reordenar es un patrón presente en reproductores multimedia, gestores de tareas y muchas aplicaciones del mundo real.
+
+**Entrada dada:** Una playlist con tres canciones, luego una eliminación y un mezclado
+
+**Salida esperada:**
+
+```
+Playlist: Blinding Lights, Levitating, Peaches  
+Removed: Levitating  
+After shuffle: (order will vary)
+```
