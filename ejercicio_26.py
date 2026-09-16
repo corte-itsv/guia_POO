@@ -8,12 +8,13 @@ class Flight:
         self.capacity = capacity
         self.passengers = []
 
-def book(self, passenger):
+    def book(self, passenger):
         if len(self.passengers) < self.capacity:
             self.passengers.append(passenger)
             print(f"{passenger.name} booked on Flight {self.flight_number}.")
         else:
             print(f"Sorry, Flight {self.flight_number} is fully booked.")
+
 
 flight = Flight("AI202", 2)
 flight.book(Passenger("Alice"))
