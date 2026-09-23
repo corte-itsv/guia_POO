@@ -1,0 +1,14 @@
+class Temperature:
+    def __init__(self, Celsius):
+        self.Celsius = Celsius
+        
+    def to_fahrenheit(self):
+        return (self.Celsius * 9/5) + 32
+        
+    def to_kelvin(self):
+        return self.Celsius + 273.15
+        
+t = Temperature(100)
+print("Celsius:", t.Celsius)
+print("Fahrenheit:", t.to_fahrenheit())
+print("Kelvin:", t.to_kelvin())
