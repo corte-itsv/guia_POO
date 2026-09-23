@@ -33,7 +33,7 @@
 **Pista:**
 - Define `__init__` con `name`, `price` y `quantity` como parámetros y asigna cada uno a `self`.
 - En `total_value()`, retorna `self.price * self.quantity`.
-- Usa un f-string con formato `:.2f` para mostrar el resultado como un valor monetario con dos decimales.
+- Usa un f-string con formato `:f.2` para mostrar el resultado como un valor monetario con dos decimales.
 
 ## Ejercicio 6: BankAccount con depósito y protección contra sobregiro
 
