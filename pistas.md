@@ -182,3 +182,34 @@
 - Agrega un método `add_item(item)` que agregue elementos a `self.items`.
 - Implementa `__len__(self)` para retornar `len(self.items)`.
 - Una vez definido `__len__`, Python lo usará automáticamente cada vez que llames a `len(cart)` sobre tu objeto.
+
+## Ejercicio 26: Clase Flight con verificación de capacidad de pasajeros
+
+**Pista:**
+- Define una clase `Passenger` con un atributo `name`.
+- Define una clase `Flight` con `flight_number`, `capacity`, y una lista vacía `passengers` en `__init__`.
+- Agrega un método `book(passenger)` que verifique `len(self.passengers) < self.capacity` antes de agregar.
+- Imprime un mensaje de confirmación en caso de éxito, o un mensaje de "vuelo completo" cuando se supere la capacidad.
+
+## Ejercicio 27: Clase Zoo que alimenta a todos los animales
+
+**Pista:**
+- Define una clase base `Animal` con un método `eat()` que retorne una cadena genérica.
+- Crea las subclases `Lion`, `Elephant` y `Parrot`, cada una sobrescribiendo `eat()` con un mensaje específico.
+- Define una clase `Zoo` con un método `add_animal(animal)` y un método `feed_all()` que recorra todos los animales almacenados y llame a `eat()` en cada uno.
+
+## Ejercicio 28: Clase Character con lógica automática de subida de nivel
+
+**Pista:**
+- Define `Character.__init__` con `name`, `health`, y establece `self.exp = 0` y `self.level = 1` como valores por defecto.
+- En `gain_exp(amount)`, suma `amount` a `self.exp`, y luego verifica si `self.exp >= 100`.
+- Si ocurre una subida de nivel, incrementa `self.level`, resta 100 de `self.exp` para trasladar el remanente, e imprime el mensaje de subida de nivel.
+- Si no ocurre una subida de nivel, imprime un mensaje más simple mostrando el total actual de experiencia.
+
+## Ejercicio 29: Clase Playlist con agregar, quitar y mezclar
+
+**Pista:**
+- Define una clase `Song` con atributos `title` y `artist`.
+- Define una clase `Playlist` con una lista interna `self.songs = []` y un método `add_song(song)` que agregue elementos a ella.
+- En `remove_song(title)`, usa una comprensión de listas para filtrar la canción cuyo `title` coincida con la cadena dada.
+- En `shuffle()`, usa `random.shuffle(self.songs)` del módulo `random` para aleatorizar el orden en el lugar.
